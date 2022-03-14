@@ -1,0 +1,10 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.header-spc {
+  margin-left: 30px;
+}
