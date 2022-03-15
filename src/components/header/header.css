@@ -1,10 +1,13 @@
 .header {
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 1rem;
 }
 
-.header-spc {
-  margin-left: 30px;
+.header > .filter,
+.header > .unread,
+.header > .read,
+.header > .favorite {
+  margin-right: 30px;
 }

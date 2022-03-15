@@ -4,10 +4,10 @@ import "./header.css";
 function Header() {
   return (
     <div className="header">
-      <div className="header-spc">Filter By:</div>
-      <div className="header-spc">Unread</div>
-      <div className="header-spc">Read</div>
-      <div className="header-spc">Favorites</div>
+      <div className="filter">Filter By:</div>
+      <div className="unread">Unread</div>
+      <div className="read">Read</div>
+      <div className="favorite">Favorites</div>
     </div>
   );
 }

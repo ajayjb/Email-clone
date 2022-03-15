@@ -1,0 +1,12 @@
+.master-slave {
+  display: flex;
+  flex-direction: row;
+}
+
+.master {
+  flex: 4;
+}
+
+.slave {
+  flex: 8;
+}

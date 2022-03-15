@@ -1,0 +1,66 @@
+.email-body {
+  border: solid 1px #cfd2dc;
+  padding: 10px;
+  border-radius: 10px;
+  color: #636363;
+  padding-top: 30px;
+  padding-right: 60px;
+  background-color: white;
+  margin-left: 30px;
+}
+
+.email-body {
+  display: flex;
+}
+
+.profile-body {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-pic-body {
+  width: 50px;
+  height: 50px;
+  background-color: #e54065;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.body {
+  flex: 11;
+  padding-left: 15px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.email-body > .body > .title > .name {
+  font-size: 1.5rem;
+}
+
+.fav {
+  font-size: 0.7rem;
+  color: white;
+  background-color: #e54065;
+  padding: 5px 15px;
+  border-radius: 15px;
+}
+
+.date-body {
+  font-size: 0.8rem;
+  margin-top: 20px;
+}
+
+.para {
+  font-size: 0.8rem;
+  margin-top: 30px;
+}
