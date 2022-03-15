@@ -5,8 +5,20 @@
 
 .master {
   flex: 4;
+  overflow-y: scroll;
+  height: calc(100vh - 50px);
+}
+
+.master::-webkit-scrollbar {
+  width: 0px;
 }
 
 .slave {
   flex: 8;
+  overflow-y: scroll;
+  height: calc(100vh - 80px);
+}
+
+.slave::-webkit-scrollbar {
+  width: 0px;
 }

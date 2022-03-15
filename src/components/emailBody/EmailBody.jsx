@@ -18,12 +18,10 @@ function EmailBody({ email, body }) {
           <div className="name">
             <strong>{subject}</strong>
           </div>
-          <div className="fav">mark as favorite</div>
+          <div className="fav">mark as favourite</div>
         </div>
         <div className="date-body">{`${localDate} ${localTime}`}</div>
-        <div className="para">
-          <>{body.body}</>
-        </div>
+        <div className="para" dangerouslySetInnerHTML={{ __html: body.body }} />
       </div>
     </div>
   );

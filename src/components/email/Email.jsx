@@ -1,7 +1,7 @@
 import React from "react";
 import "./email.css";
 
-function Email({ email, onEmailClick }) {
+function Email({ email, onEmailClick, border }) {
   const { from, subject, date, short_description } = email;
   const localDate = new Date(date).toLocaleDateString();
   const localTime = new Date(date).toLocaleTimeString();
@@ -11,6 +11,7 @@ function Email({ email, onEmailClick }) {
       onClick={() => {
         onEmailClick(email);
       }}
+      style={border}
     >
       <div className="profile">
         <div className="profile-pic">{from.name[0].toUpperCase()}</div>
