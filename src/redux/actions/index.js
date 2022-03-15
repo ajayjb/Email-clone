@@ -16,11 +16,20 @@ const fetchBody = (id) => {
   };
 };
 
+// Action creater for mailListAndBodyView.
+const mailListAndBodyView = (value) => {
+  return { type: "BODY_VIEW", payload: value };
+};
+
+// Action creater for filter.
+const setFilter = (value) => {
+  return { type: "SET_FILTER", payload: value };
+};
+
 // Action creater for when page loads putting all emails to unread.
 const fetchUnread = () => {
   return async (dispatch) => {
     const emails = await emailApi.get("/");
-    console.log("fetchUnread");
     dispatch({ type: "FETCH_UNREAD", payload: emails.data.list });
   };
 };
@@ -47,4 +56,6 @@ export {
   removeFromUnread,
   addToRead,
   addToFavourites,
+  setFilter,
+  mailListAndBodyView,
 };

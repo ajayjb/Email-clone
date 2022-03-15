@@ -1,13 +1,25 @@
 import React from "react";
 import Email from "../email/Email";
 import { useEffect, useState } from "react";
-import { fetchEmails, fetchBody, fetchUnread } from "../../redux/actions";
+import {
+  fetchEmails,
+  fetchBody,
+  fetchUnread,
+  mailListAndBodyView,
+} from "../../redux/actions";
 import { connect } from "react-redux";
 import EmailBody from "../emailBody/EmailBody";
 import "./emails.css";
 
-function Emails({ emails, fetchEmails, fetchBody, body, fetchUnread }) {
-  const [masterSlave, setMasterSlave] = useState(false);
+function Emails({
+  emails,
+  fetchEmails,
+  fetchBody,
+  body,
+  fetchUnread,
+  bodyView,
+  mailListAndBodyView,
+}) {
   const [selectedEmail, setSelectedMail] = useState(null);
 
   const selectedCSS = {
@@ -22,7 +34,7 @@ function Emails({ emails, fetchEmails, fetchBody, body, fetchUnread }) {
   const onEmailClick = (e) => {
     fetchBody(e.id);
     setSelectedMail(e);
-    setMasterSlave(true);
+    mailListAndBodyView(true);
   };
 
   const mailRenderFullView = () => {
@@ -53,17 +65,32 @@ function Emails({ emails, fetchEmails, fetchBody, body, fetchUnread }) {
     );
   };
 
-  return <div>{masterSlave ? renderFullMailBody() : mailRenderFullView()}</div>;
+  return <div>{bodyView ? renderFullMailBody() : mailRenderFullView()}</div>;
 }
 
 const mapStateToProps = (state) => {
-  return { emails: state.emails, body: state.emailsBody };
+  if (state.filter === "unread") {
+    var emails = Object.values(state.unread);
+  } else if (state.filter === "read") {
+    var emails = state.read;
+  } else if (state.filter === "favourite") {
+    var emails = state.favourite;
+  } else {
+    var emails = state.emails;
+  }
+  return {
+    emails: emails,
+    body: state.emailsBody,
+    currentFilter: state.filter,
+    bodyView: state.bodyView,
+  };
 };
 
 const createConnect = connect(mapStateToProps, {
   fetchEmails,
   fetchBody,
   fetchUnread,
+  mailListAndBodyView,
 });
 
 export default createConnect(Emails);

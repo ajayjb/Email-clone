@@ -19,6 +19,24 @@ const fetchbodyReducer = (body = {}, action) => {
   }
 };
 
+const mailBodyViewReducer = (bodyView = false, action) => {
+  switch (action.type) {
+    case "BODY_VIEW":
+      return action.payload;
+    default:
+      return bodyView;
+  }
+};
+
+const setFiterReducer = (filter = null, action) => {
+  switch (action.type) {
+    case "SET_FILTER":
+      return action.payload;
+    default:
+      return filter;
+  }
+};
+
 const unreadReducer = (unread = {}, action) => {
   switch (action.type) {
     case "FETCH_UNREAD":
@@ -58,4 +76,6 @@ export default combineReducers({
   unread: unreadReducer,
   read: readReducer,
   favourite: favouriteReducer,
+  filter: setFiterReducer,
+  bodyView: mailBodyViewReducer,
 });

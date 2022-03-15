@@ -5,9 +5,13 @@
   font-size: 1rem;
 }
 
-.header > .filter,
 .header > .unread,
 .header > .read,
-.header > .favorite {
+.header > .favourite {
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.header > .filter {
   margin-right: 30px;
 }
