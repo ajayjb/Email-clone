@@ -1,10 +1,14 @@
 import { combineReducers } from "redux";
 import _ from "lodash";
 
-const fetchEmailReducer = (email = [], action) => {
+const fetchEmailReducer = (email = {}, action) => {
   switch (action.type) {
     case "FETCH_EMAIL":
-      return action.payload;
+      let temp = {};
+      action.payload.forEach((element) => {
+        temp = { ...temp, [element.id]: element };
+      });
+      return temp;
     default:
       return email;
   }
@@ -28,12 +32,21 @@ const mailBodyViewReducer = (bodyView = false, action) => {
   }
 };
 
-const setFiterReducer = (filter = null, action) => {
+const setFilterReducer = (filter = null, action) => {
   switch (action.type) {
     case "SET_FILTER":
       return action.payload;
     default:
       return filter;
+  }
+};
+
+const selectedEmailReducer = (email = null, action) => {
+  switch (action.type) {
+    case "SELECTED_EMAIL":
+      return action.payload;
+    default:
+      return email;
   }
 };
 
@@ -52,19 +65,21 @@ const unreadReducer = (unread = {}, action) => {
   }
 };
 
-const readReducer = (read = [], action) => {
+const readReducer = (read = {}, action) => {
   switch (action.type) {
     case "ADD_TO_READ":
-      return [...read, action.payload];
+      return { ...read, [action.payload["id"]]: action.payload };
     default:
       return read;
   }
 };
 
-const favouriteReducer = (favourite = [], action) => {
+const favouriteReducer = (favourite = {}, action) => {
   switch (action.type) {
     case "ADD_TO_FAVOURITES":
-      return [...favourite, action.payload];
+      return { ...favourite, [action.payload["id"]]: action.payload };
+    case "REMOVE_FROM_FAVOURITES":
+      return _.omit(favourite, [action.payload]);
     default:
       return favourite;
   }
@@ -76,6 +91,7 @@ export default combineReducers({
   unread: unreadReducer,
   read: readReducer,
   favourite: favouriteReducer,
-  filter: setFiterReducer,
+  filter: setFilterReducer,
   bodyView: mailBodyViewReducer,
+  selectedEmail: selectedEmailReducer,
 });

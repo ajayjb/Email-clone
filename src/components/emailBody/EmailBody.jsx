@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import {
+  addToFavourites,
+  removeFromFavourites,
+  mailListAndBodyView,
+  fetchBody,
+  removeFromUnread,
+} from "../../redux/actions";
 import "./emailBody.css";
 
-function EmailBody({ email, body }) {
+function EmailBody({
+  email,
+  body,
+  currentFilter,
+  removeFromFavourites,
+  addToFavourites,
+  mailListAndBodyView,
+}) {
   if (body === undefined) {
     return <></>;
   }
   const { from, subject, date, short_description } = email;
   const localDate = new Date(date).toLocaleDateString();
   const localTime = new Date(date).toLocaleTimeString();
+
+  const onFavAddClickHandler = (mail) => {
+    addToFavourites(mail);
+  };
+
+  const onFavRemoveClickHandler = (id) => {
+    removeFromFavourites(id);
+    mailListAndBodyView(false);
+  };
+
   return (
     <div className="email-body">
       <div className="profile-body">
@@ -18,7 +43,25 @@ function EmailBody({ email, body }) {
           <div className="name">
             <strong>{subject}</strong>
           </div>
-          <div className="fav">mark as favourite</div>
+          {currentFilter !== "favourite" ? (
+            <div
+              onClick={() => {
+                onFavAddClickHandler(email);
+              }}
+              className="fav"
+            >
+              mark as favourite
+            </div>
+          ) : (
+            <div
+              onClick={() => {
+                onFavRemoveClickHandler(email.id);
+              }}
+              className="fav"
+            >
+              Remove from favourite
+            </div>
+          )}
         </div>
         <div className="date-body">{`${localDate} ${localTime}`}</div>
         <div className="para" dangerouslySetInnerHTML={{ __html: body.body }} />
@@ -27,4 +70,16 @@ function EmailBody({ email, body }) {
   );
 }
 
-export default EmailBody;
+const mapStateToProps = (state) => {
+  return { currentFilter: state.filter };
+};
+
+const createConnect = connect(mapStateToProps, {
+  addToFavourites,
+  removeFromFavourites,
+  mailListAndBodyView,
+  fetchBody,
+  removeFromUnread,
+});
+
+export default createConnect(EmailBody);

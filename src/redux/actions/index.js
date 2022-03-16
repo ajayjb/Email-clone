@@ -21,6 +21,11 @@ const mailListAndBodyView = (value) => {
   return { type: "BODY_VIEW", payload: value };
 };
 
+// Action creater for selected video
+const setSelectedEmail = (email) => {
+  return { type: "SELECTED_EMAIL", payload: email };
+};
+
 // Action creater for filter.
 const setFilter = (value) => {
   return { type: "SET_FILTER", payload: value };
@@ -49,6 +54,11 @@ const addToFavourites = (email) => {
   return { type: "ADD_TO_FAVOURITES", payload: email };
 };
 
+// Action creater for removing favourites
+const removeFromFavourites = (id) => {
+  return { type: "REMOVE_FROM_FAVOURITES", payload: id };
+};
+
 export {
   fetchEmails,
   fetchBody,
@@ -58,4 +68,6 @@ export {
   addToFavourites,
   setFilter,
   mailListAndBodyView,
+  setSelectedEmail,
+  removeFromFavourites,
 };

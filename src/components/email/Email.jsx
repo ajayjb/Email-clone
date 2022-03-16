@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./email.css";
 
-function Email({ email, onEmailClick, border }) {
+function Email({ email, onEmailClick, border, fav, readEmails }) {
+  const ref = useRef(null);
+  if (readEmails.includes(email.id)) {
+    var newStyle = { ...border, backgroundColor: "#f2f2f2" };
+  }
   const { from, subject, date, short_description } = email;
   const localDate = new Date(date).toLocaleDateString();
   const localTime = new Date(date).toLocaleTimeString();
@@ -11,7 +15,8 @@ function Email({ email, onEmailClick, border }) {
       onClick={() => {
         onEmailClick(email);
       }}
-      style={border}
+      style={newStyle}
+      ref={ref}
     >
       <div className="profile">
         <div className="profile-pic">{from.name[0].toUpperCase()}</div>
@@ -24,7 +29,10 @@ function Email({ email, onEmailClick, border }) {
           Subject: <strong>{subject}</strong>
         </div>
         <div className="smallDesc">{short_description}</div>
-        <div className="date">{`${localDate} ${localTime}`}</div>
+        <div className="date-fav">
+          <div className="date">{`${localDate} ${localTime}`}</div>
+          <div className="favourite-master">{fav}</div>
+        </div>
       </div>
     </div>
   );
