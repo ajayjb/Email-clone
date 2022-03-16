@@ -26,7 +26,6 @@ function Emails({
   selectedEmail,
   addToRead,
   removeFromUnread,
-  favouriteEmails,
 }) {
   const [removeUnread, setRemoveUnread] = useState(false);
 
@@ -56,56 +55,21 @@ function Emails({
     setRemoveUnread(!removeUnread);
   };
 
-  // Mapping Email component to email Array
+  // Mapping Email component to Email Array
   const mailRenderFullView = () => {
     return emails.map((e) => {
       if (selectedEmail && selectedEmail.id === e.id) {
-        if (favouriteEmails.includes(e.id)) {
-          return (
-            <div key={e.id}>
-              <Email
-                border={selectedCSS}
-                onEmailClick={onEmailClick}
-                email={e}
-                fav={"Favourite"}
-              />
-            </div>
-          );
-        } else {
-          return (
-            <div key={e.id}>
-              <Email
-                border={selectedCSS}
-                onEmailClick={onEmailClick}
-                email={e}
-                fav={""}
-              />
-            </div>
-          );
-        }
-      } else if (favouriteEmails.includes(e.id)) {
         return (
           <div key={e.id}>
-            <Email
-              boder={null}
-              onEmailClick={onEmailClick}
-              email={e}
-              fav={"Favourite"}
-            />
-          </div>
-        );
-      } else {
-        return (
-          <div key={e.id}>
-            <Email
-              boder={null}
-              onEmailClick={onEmailClick}
-              email={e}
-              fav={""}
-            />
+            <Email border={selectedCSS} onEmailClick={onEmailClick} email={e} />
           </div>
         );
       }
+      return (
+        <div key={e.id}>
+          <Email border={null} onEmailClick={onEmailClick} email={e} />
+        </div>
+      );
     });
   };
 
@@ -132,11 +96,11 @@ const mapStateToProps = (state) => {
   if (state.filter === "unread") {
     var emails = Object.values(state.unread);
   } else if (state.filter === "read") {
-    var emails = Object.values(state.read);
+    emails = Object.values(state.read);
   } else if (state.filter === "favourite") {
-    var emails = Object.values(state.favourite);
+    emails = Object.values(state.favourite);
   } else {
-    var emails = Object.values(state.emails);
+    emails = Object.values(state.emails);
   }
   return {
     emails: emails,
@@ -144,8 +108,6 @@ const mapStateToProps = (state) => {
     currentFilter: state.filter,
     bodyView: state.bodyView,
     selectedEmail: state.selectedEmail,
-    favouriteEmails: Object.keys(state.favourite),
-    readEmails: Object.keys(state.read),
   };
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   addToFavourites,
@@ -20,7 +20,7 @@ function EmailBody({
   if (body === undefined) {
     return <></>;
   }
-  const { from, subject, date, short_description } = email;
+  const { from, subject, date } = email;
   const localDate = new Date(date).toLocaleDateString();
   const localTime = new Date(date).toLocaleTimeString();
 
