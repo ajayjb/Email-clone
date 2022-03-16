@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
+import { connect } from "react-redux";
 import "./email.css";
 
 function Email({ email, onEmailClick, border, fav, readEmails }) {
   const ref = useRef(null);
   if (readEmails.includes(email.id)) {
-    var newStyle = { ...border, backgroundColor: "#f2f2f2" };
+    var readBackground = { ...border, backgroundColor: "#f2f2f2" };
   }
   const { from, subject, date, short_description } = email;
   const localDate = new Date(date).toLocaleDateString();
@@ -15,7 +16,7 @@ function Email({ email, onEmailClick, border, fav, readEmails }) {
       onClick={() => {
         onEmailClick(email);
       }}
-      style={newStyle}
+      style={readBackground}
       ref={ref}
     >
       <div className="profile">
@@ -38,4 +39,10 @@ function Email({ email, onEmailClick, border, fav, readEmails }) {
   );
 }
 
-export default Email;
+const mapStateToProps = (state) => {
+  return { readEmails: Object.keys(state.read) };
+};
+
+const createConnect = connect(mapStateToProps);
+
+export default createConnect(Email);

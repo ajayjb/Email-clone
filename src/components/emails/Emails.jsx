@@ -27,7 +27,6 @@ function Emails({
   addToRead,
   removeFromUnread,
   favouriteEmails,
-  readEmails,
 }) {
   const [removeUnread, setRemoveUnread] = useState(false);
 
@@ -69,7 +68,6 @@ function Emails({
                 onEmailClick={onEmailClick}
                 email={e}
                 fav={"Favourite"}
-                readEmails={readEmails}
               />
             </div>
           );
@@ -81,7 +79,6 @@ function Emails({
                 onEmailClick={onEmailClick}
                 email={e}
                 fav={""}
-                readEmails={readEmails}
               />
             </div>
           );
@@ -94,7 +91,6 @@ function Emails({
               onEmailClick={onEmailClick}
               email={e}
               fav={"Favourite"}
-              readEmails={readEmails}
             />
           </div>
         );
@@ -106,7 +102,6 @@ function Emails({
               onEmailClick={onEmailClick}
               email={e}
               fav={""}
-              readEmails={readEmails}
             />
           </div>
         );
