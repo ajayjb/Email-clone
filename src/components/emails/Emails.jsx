@@ -27,8 +27,8 @@ function Emails({
   addToRead,
   removeFromUnread,
 }) {
+  console.log("screen up");
   const [removeUnread, setRemoveUnread] = useState(false);
-
   const selectedCSS = {
     border: "solid 2px #e54065",
   };
@@ -42,6 +42,7 @@ function Emails({
   useEffect(() => {
     return () => {
       if (selectedEmail) {
+        console.log("clean up");
         removeFromUnread(selectedEmail.id);
       }
     };
@@ -58,16 +59,11 @@ function Emails({
   // Mapping Email component to Email Array
   const mailRenderFullView = () => {
     return emails.map((e) => {
-      if (selectedEmail && selectedEmail.id === e.id) {
-        return (
-          <div key={e.id}>
-            <Email border={selectedCSS} onEmailClick={onEmailClick} email={e} />
-          </div>
-        );
-      }
+      const border =
+        selectedEmail && selectedEmail.id === e.id ? selectedCSS : null;
       return (
         <div key={e.id}>
-          <Email border={null} onEmailClick={onEmailClick} email={e} />
+          <Email border={border} onEmailClick={onEmailClick} email={e} />
         </div>
       );
     });
